@@ -13,4 +13,4 @@ if len(stock_zh_a_spot_em_df) > 100:
     os.makedirs(root, exist_ok=True)
     output_path = os.path.join(root, today + '.json')
     with open(output_path, 'w') as fp:
-        fp.write(data)
+        fp.write(output)
