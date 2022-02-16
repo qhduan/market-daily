@@ -11,6 +11,7 @@ jobs:
     - name: Create local changes
       run: |
         echo '1' > 1.txt
+        git add .
     - name: Commit files
       run: |
         git config --local user.email "mail@qhduan.com"
