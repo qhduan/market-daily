@@ -1,20 +1,21 @@
-name: GitHub Actions Demo
-on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - shell: bash
-        env: # Or as an environment variable
-          ID_RSA: ${{ secrets.ID_RSA }}
-        run: |
-          mkdir -p ~/.ssh
-          echo $ID_RSA > ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
-          git clone git@github.com:qhduan/receive-push.git
-          cd receive-push
-          echo '1' > 1.txt
-          git add .
-          git commit -m 'update'
-          git push -f origin master
-
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+    - name: Create local changes
+      run: |
+        echo '1' > 1.txt
+    - name: Commit files
+      run: |
+        git config --local user.email "mail@qhduan.com"
+        git config --local user.name "qhduan"
+        git commit -m "Add changes" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
