@@ -1,0 +1,19 @@
+name: GitHub Actions Demo
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        env: # Or as an environment variable
+          ID_RSA: ${{ secrets.ID_RSA }}
+        run: |
+          mkdir -p ~/.ssh
+          echo $ID_RSA > ~/.ssh/id_rsa
+          git clone git@github.com:qhduan/receive-push.git
+          cd receive-push
+          echo '1' > 1.txt
+          git add .
+          git commit -m 'update'
+          git push -f origin master
+
