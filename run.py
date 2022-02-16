@@ -5,7 +5,7 @@ import akshare as ak
 
 today = str(datetime.now())[:10]
 stock_zh_a_spot_em_df = ak.stock_zh_a_spot_em()
-# print(stock_zh_a_spot_em_df)
+
 if len(stock_zh_a_spot_em_df) > 100:
     obj = json.loads(stock_zh_a_spot_em_df.to_json(orient='records'))
     output = json.dumps(obj, indent=4, ensure_ascii=False)
