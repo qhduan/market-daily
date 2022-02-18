@@ -1,7 +1,7 @@
 name: Fetch market daily
 on:
   schedule:
-    - cron: '30 0 * * *' # 中国2日的00:30，就是UTC时间1日的16:30
+    - cron: '30 8 * * *' # 中国1日的16:30，就是UTC时间1日的08:30
 jobs:
   build:
     runs-on: ubuntu-latest
